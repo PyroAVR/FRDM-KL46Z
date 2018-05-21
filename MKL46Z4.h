@@ -5,14 +5,14 @@
 typedef int uint32_t;
 typedef char uint8_t;
 typedef short int uint16_t;
-typedef union {
-    char DAT;
-    char DATL:4;
-    char DATH:4;
+typedef struct {
+    char  DATL;
+    char  DATH;
 } DAC_DAT;
 
 typedef struct {
     DAC_DAT DAT[2];
+    uint8_t __offset0[28];
     uint8_t SR, C0,C1,C2;
 } DAC_S;
 
@@ -33,13 +33,24 @@ typedef struct    {
 typedef struct  {
     uint32_t SOPT1;
     uint32_t SOPT1CFG;
-    uint32_t SOPT2, SOPT4, SOPT5, SOPT7;
+    uint8_t  __offset0[4092]; //offset needed
+    uint32_t SOPT2;
+    uint8_t  __offset1[4];
+    uint32_t SOPT4, SOPT5;
+    uint8_t  __offset2[4];
+    uint32_t SOPT7;
+    uint8_t  __offset3[8];
     uint32_t SDID;
+    uint8_t  __offset4[12];
     uint32_t SCGC4, SCGC5, SCGC6, SCGC7;
     uint32_t CLKDIV1;
+    uint8_t  __offset5[4];
     uint32_t FCFG1, FCFG2;
+    uint8_t  __offset6[4];
     uint32_t UIDMH;
     uint32_t UIDML;
+    uint32_t UIDL;
+    uint8_t  __offset7[156];
     uint32_t COPC;
     uint32_t SRVCOP;
 } SIM_S;
@@ -54,6 +65,7 @@ typedef struct  {
     uint32_t CNT;
     uint32_t MOD;
     TPM_CHAN CONTROLS[5];
+    uint8_t  __offset0[4];
     uint32_t STATUS;
     uint32_t CONF;
 } TPM_S;

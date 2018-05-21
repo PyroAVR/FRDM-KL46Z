@@ -14,14 +14,14 @@
 #define isnum(x)    ((x >= '0') && (x <= '9'))
 int main (void) {
   uint8_t scan_buf[80];
-  /*__asm(".code 16\ncpsid i");*/
+  __asm(".syntax unified\ncpsid i");
   /* Perform all device initialization here */
   /* Before unmasking interrupts            */
   init_rxtx();
   init_dac0();
   init_and_cal_adc0();
-  init_tpm0();
-  /*__asm("cpsie i\n.code 32");*/
+  /*init_tpm0();*/
+  __asm("cpsie i");
   
 
   for (;;) { 
@@ -47,7 +47,7 @@ int main (void) {
     print("\xA\xD        New digital value:\t0x");
     PutNumHex(newval);
     print("\xA\xD");
-    TPM0->CONTROLS[4].CnV = pwm_duty_table[((newval*5)/1024)];
+  //  TPM0->CONTROLS[4].CnV = pwm_duty_table[((newval*5)/1024)];
   } 
 
 } /* main */
@@ -83,7 +83,7 @@ void init_and_cal_adc0()    {
 }
 
 void init_tpm0()    {
-    SIM->SCGC6             |= SIM_SCGC6_TPM0_MASK;
+    SIM->SCGC6             |= (1 << 24);//SIM_SCGC6_TPM0_MASK;
     SIM->SCGC5             |= SIM_SCGC5_PORTE_MASK;
     PORTE->PCR[31]          = SET_PTE31_TPM0_CH4_OUT;
     SIM->SOPT2             &= ~SIM_SOPT2_TPMSRC_MASK;

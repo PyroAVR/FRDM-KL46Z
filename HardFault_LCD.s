@@ -108,6 +108,7 @@
 //Linker requires Reset_Handler
 .text
 .global HardFault_LCD
+.thumb_func
 HardFault_LCD://   PROC  {},{}
 //****************************************************************
 //HardFault_Handler displays lower halfword of address that caused

@@ -142,6 +142,7 @@ gc_loop:    cpsid i
 
 
 .global uart0_isr
+.thumb_func
 uart0_isr:   //proc {r0-r14}, {}
 // interrupt service routine for uart0.  handles rx and tx requests.
 // inputs             : none

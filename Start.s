@@ -27,6 +27,7 @@
 .global Startup
 .text
 //---------------------------------------------------------------
+.thumb_func
 Startup:     //PROC    {},{}
 //****************************************************************
 //Performs the following startup tasks
@@ -40,9 +41,8 @@ Startup:     //PROC    {},{}
 //Modifies:  R0-R15//APSR
 //****************************************************************
 //Save return address
-            mov r0, r0
-            PUSH {lr}
 //Initialize system
+            push {lr}
             BL      SystemInit
 //Mask interrupts
             cpsid i
@@ -309,6 +309,7 @@ __MCG_Wait_CLKST_PLL:
             .global  Dummy_Handler
             .global  HardFault_Handler
 Dummy_Handler:  //PROC  {},{}
+.thumb_func
 HardFault_Handler:
 //****************************************************************
 //Dummy exception handler (infinite loop)

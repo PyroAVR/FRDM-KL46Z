@@ -46,6 +46,8 @@ init_rxtx://   proc    {r0-r14}, {}
             pop  {r0-r2, pc}
             //endp
 
+tpm0_handler:
+            bx lr
 
 //>>>>>   end subroutine code <<<<<
 .align
@@ -88,10 +90,10 @@ rxq: .space 500
 //>>>>>   end variables here <<<<<
 .section "vtab", "a"
 //ARM core vectors
- .long stack_top       //00:end of stack
+ .long stack_top          //00:end of stack
  .long Startup            //01:reset vector
  .long Dummy_Handler      //02:NMI
- .long HardFault_LCD  //03:hard fault
+ .long HardFault_LCD      //03:hard fault
  .long Dummy_Handler      //04:(reserved)
  .long Dummy_Handler      //05:(reserved)
  .long Dummy_Handler      //06:(reserved)
@@ -123,7 +125,7 @@ rxq: .space 500
  .long Dummy_Handler      //30:UART2 (status// error)
  .long Dummy_Handler      //31:ADC0
  .long Dummy_Handler      //32:CMP0
- .long Dummy_Handler      //33:TPM0
+ .long tpm0_handler       //33:TPM0
  .long Dummy_Handler      //34:TPM1
  .long Dummy_Handler      //35:TPM2
  .long Dummy_Handler      //36:RTC (alarm)

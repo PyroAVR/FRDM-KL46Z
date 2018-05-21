@@ -32,3 +32,6 @@ clean:
 
 disasm: build
 	$(TOOLCHAIN)-objdump -D build/ex11.elf > $(OUT)/ex11.s
+
+flash: build
+	openocd -f frdm-kl46z.cfg -c "init;kinetis mdm mass_erase 0;reset halt;flash write_image build/ex11.bin 0 bin;reset halt; exit"
