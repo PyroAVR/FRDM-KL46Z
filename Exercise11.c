@@ -20,7 +20,7 @@ int main (void) {
   init_rxtx();
   init_dac0();
   init_and_cal_adc0();
-  /*init_tpm0();*/
+  init_tpm0();
   __asm("cpsie i");
   
 
@@ -83,7 +83,7 @@ void init_and_cal_adc0()    {
 }
 
 void init_tpm0()    {
-    SIM->SCGC6             |= (1 << 24);//SIM_SCGC6_TPM0_MASK;
+    SIM->SCGC6             |= SIM_SCGC6_TPM0_MASK;
     SIM->SCGC5             |= SIM_SCGC5_PORTE_MASK;
     PORTE->PCR[31]          = SET_PTE31_TPM0_CH4_OUT;
     SIM->SOPT2             &= ~SIM_SOPT2_TPMSRC_MASK;

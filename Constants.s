@@ -105,9 +105,9 @@
 //1-->2:RE=receiver enable (enabled)
 //0-->1:RWU=receiver wakeup control (normal)
 //0-->0:SBK=send break (disabled, normal)
-.equ UART0_C2_T_R, (UART0_C2_TE_MASK || UART0_C2_RE_MASK)
-.equ UART0_C2_T_RI, (UART0_C2_RIE_MASK || UART0_C2_T_R)
-.equ UART0_C2_TI_RI, (UART0_C2_TIE_MASK || UART0_C2_T_RI)
+.equ UART0_C2_T_R, (UART0_C2_TE_MASK | UART0_C2_RE_MASK)
+.equ UART0_C2_T_RI, (UART0_C2_RIE_MASK | UART0_C2_T_R)
+.equ UART0_C2_TI_RI, (UART0_C2_TIE_MASK | UART0_C2_T_RI)
 //---------------------------------------------------------------
 //UART0_C3
 //0-->7:R8T9=9th data bit for receiver (not used M=0)

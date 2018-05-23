@@ -1,4 +1,7 @@
+/* Entry point for application */
 ENTRY(Startup)
+
+/* Optional, but allows ld to warn when application does not fit in memory. */
 MEMORY
 {
     vtab : ORIGIN = 0x00000000,      LENGTH = 196
@@ -10,12 +13,15 @@ MEMORY
 
 SECTIONS
 {
- . = . + 0x8000;
- vtab  : { *(.vtab) } > vtab
- .text : { *(.text*) } > rom
- .data : { *(.data*) } > rom
- .bss  : { *(.bss COMMON) } > ram
- . = ALIGN(8);
- . = . + 0x1000;
- stack_top = .;
+    . = . + 0x8000;    /* for OpenSDAv2.1 */
+    vtab  : { *(.vtab) } > vtab
+    .text : { *(.text*) } > rom
+    .data : { *(.data*) } > rom
+    .bss  : {
+            /* allocate the stack */
+            . = ALIGN(8);
+            . = . + 0x0100;
+            stack_top = .;
+            /* insert and space variables appropriately */
+           *(.bss COMMON) } > ram
 }
