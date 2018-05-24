@@ -65,8 +65,9 @@ typedef struct  {
     uint32_t CNT;
     uint32_t MOD;
     TPM_CHAN CONTROLS[5];
-    uint8_t  __offset0[20];
+    uint8_t  __offset0[26];
     uint32_t STATUS;
+    uint8_t  __offset1[48];
     uint32_t CONF;
 } TPM_S;
 

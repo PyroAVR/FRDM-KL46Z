@@ -18,8 +18,8 @@
 .include "MKL46Z4.s"     //Included by start.s
 //****************************************************************
 //EQUates
-.equ TPM_CnV_PWM_DUTY_2ms, 6000
-.equ TPM_CnV_PWM_DUTY_1ms, 2200
+.equ TPM_CnV_PWM_DUTY_2ms, 6600
+.equ TPM_CnV_PWM_DUTY_1ms, 1500
 .equ pwm_2ms, TPM_CnV_PWM_DUTY_2ms
 .equ pwm_1ms, TPM_CnV_PWM_DUTY_1ms
 .equ dac0_steps, 4096    //guessing!

@@ -499,6 +499,7 @@ strlen_pr: .ascii "Length:"
 // log lookup table.
 // index into the table is the desired power of two (idx = log2(n)),
 // value at that index is the largest power of ten less than n.
+.align 2
 bin2dec_lut:  .word 1, 1, 1, 1, 10, 10, 10, 100, 100, 100, 1000, 1000, 1000
               .word 10000, 10000, 10000, 100000, 100000, 100000, 1000000
               .word 1000000, 1000000, 1000000, 10000000, 10000000, 10000000
