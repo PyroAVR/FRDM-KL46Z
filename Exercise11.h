@@ -22,20 +22,12 @@ typedef unsigned char UInt8;
 /* assembly language ROM table entries */
 extern UInt16 dac0_table_0;
 extern UInt16 pwm_duty_table_0;
+
 /*
-typedef struct  {
-   uint32_t *in_ptr;
-   uint32_t *out_ptr;
-   uint32_t *buf_start;
-   uint32_t *buf_past;
-   uint8_t   size;
-   uint8_t   num_enqd; 
-} queue_s;
-*/
-/* assembly language subroutines */
-//void InitQueue(uint8_t *buf, queue_s *q, uint8_t buf_size); 
-//void Enqueue(char byte, queue_s *q);
-//char Dequeue(queue_s *q);
+ *Assembly language subroutines 
+ *The 'asm("name")' attribute is a GNU extension to inform the compiler of the
+ *label/symbol name of the code to call.
+ */
 extern void init_rxtx(void) asm("init_rxtx");
 extern void init_uart0(void) asm("init_uart0");
 extern char getchar(void) asm("getchar");
@@ -271,7 +263,6 @@ UInt16 *pwm_duty_table = &pwm_duty_table_0;
 
 /* C function declarations */
 
-//parameterize these
 void init_dac0(void);
 void init_and_cal_adc0(void);
 void init_tpm0(void);

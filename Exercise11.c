@@ -10,6 +10,8 @@
  *to provide PWM signals routed through PORTE.
  *Repeat indefinitely.
  */
+const uint32_t tpm_conf_default = TPM_CONF_DEFAULT;
+const uint32_t set_pte31_tpm0_ch4_out = SET_PTE31_TPM0_CH4_OUT;
 int main (void) {
     /*
      *Device initialization.  .syntax unified is necessary to tell GNU as how
@@ -88,10 +90,10 @@ void init_and_cal_adc0()    {
 void init_tpm0()    {
     SIM->SCGC6             |= SIM_SCGC6_TPM0_MASK;          //Enable TPM0 clock
     SIM->SCGC5             |= SIM_SCGC5_PORTE_MASK;         //Enable PORTE clock
-    PORTE->PCR[31]          = SET_PTE31_TPM0_CH4_OUT;       //Set pin mux
+    //PORTE->PCR[31]          = SET_PTE31_TPM0_CH4_OUT;       //Set pin mux
     SIM->SOPT2             &= ~SIM_SOPT2_TPMSRC_MASK;       //Set TPM clksrc
     SIM->SOPT2             |= SIM_SOPT2_TPM_MCGPLLCLK_DIV2; //
-    TPM0->CONF              = TPM_CONF_DEFAULT;
+//    TPM0->CONF              = TPM_CONF_DEFAULT;
     TPM0->CNT               = TPM_CNT_INIT;                 //Set initial val.
     TPM0->MOD               = TPM_MOD_PWM_PERIOD_20ms;      //Set PWM per
     TPM0->CONTROLS[4].CnSC  = TPM_CnSC_PWMH;                //Set high time

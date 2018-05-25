@@ -18,10 +18,12 @@ SECTIONS
     .text : { *(.text*) } > rom
     .data : { *(.data*) } > rom
     .bss  : {
-            /* allocate the stack */
-            . = ALIGN(8);
-            . = . + 0x0100;
-            stack_top = .;
-            /* insert and space variables appropriately */
-           *(.bss COMMON) } > ram
+                /* allocate the stack */
+                . = ALIGN(8);
+                . = . + 0x0100;
+                stack_top = .;
+                /* insert and space variables appropriately */
+                . = ALIGN(8);
+               *(.bss COMMON)
+            } > ram
 }

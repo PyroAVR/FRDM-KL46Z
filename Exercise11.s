@@ -1,21 +1,8 @@
-//****************************************************************
-//Descriptive comment header goes here.
-//(What does the program do?)
-//Name:  <Your name here>
-//Date:  <Date completed here>
-//Class:  CMPE-250
-//Section:  <Your lab section, day, and time here>
-//---------------------------------------------------------------
-//Keil Template for KL46 Assembly with Keil C startup
-//R. W. Melton
-//November 13, 2017
-//****************************************************************
 //Assembler directives
 .syntax unified
-.equ  MIXED_ASM_C, true
 //****************************************************************
 //Include files
-.include "MKL46Z4.s"     //Included by start.s
+.include "MKL46Z4.s"
 //****************************************************************
 //EQUates
 .equ TPM_CnV_PWM_DUTY_2ms, 6600
@@ -47,7 +34,8 @@ init_rxtx://   proc    {r0-r14}, {}
             //endp
 
 tpm0_handler:
-            bx lr
+            push {lr}
+            pop  {pc}
 
 //>>>>>   end subroutine code <<<<<
 .align
@@ -55,6 +43,7 @@ tpm0_handler:
 //Constants
 .data
 //>>>>> begin constants here <<<<<
+.align
 .global dac0_table_0
 dac0_table_0:
 dac0_table:
@@ -64,6 +53,7 @@ dac0_table:
             .word (((dac0_steps - 1) * 7) / (servo_positions * 2))
             .word (((dac0_steps - 1) * 9) / (servo_positions * 2))
 
+.align
 .global pwm_duty_table_0
 pwm_duty_table_0:
 pwm_duty_table:
@@ -72,7 +62,6 @@ pwm_duty_table:
             .word (((pwm_2ms-pwm_1ms)/2) + pwm_1ms)
             .word (((pwm_2ms-pwm_1ms)/4) + pwm_1ms)
             .word pwm_1ms
-
 //>>>>>   end constants here <<<<<
 //**********************************************************************
 //Variables
@@ -125,7 +114,7 @@ rxq: .space 500
  .long Dummy_Handler      //30:UART2 (status// error)
  .long Dummy_Handler      //31:ADC0
  .long Dummy_Handler      //32:CMP0
- .long tpm0_handler       //33:TPM0
+ .long Dummy_Handler       //33:TPM0
  .long Dummy_Handler      //34:TPM1
  .long Dummy_Handler      //35:TPM2
  .long Dummy_Handler      //36:RTC (alarm)
@@ -140,5 +129,5 @@ rxq: .space 500
  .long Dummy_Handler      //45:Segment LCD
  .long Dummy_Handler      //46:PORTA pin detect
  .long Dummy_Handler      //47:PORTC and PORTD pin detect
-
+.align
 .end
