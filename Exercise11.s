@@ -20,6 +20,7 @@
 .text
 //>>>>> begin subroutine code <<<<<
 .global init_rxtx
+.thumb_func
 init_rxtx://   proc    {r0-r14}, {}
             push {r0-r2, lr}
             ldr  r2, =500
