@@ -18,3 +18,10 @@
 
 ### licensing
  - uhh maybe don't look at this if you're in CMPE-250?
+
+### running
+ - Start openocd by typing `sudo make debug` at the console
+ - Run the `telnet.sh` and `gdb.sh` scripts in separate terminals.
+ - If GDB complains about 'Target not halted', try typing `reset init` at the
+   telnet console.  This will instruct OpenOCD to reset the board and wait for
+   the debugger.
